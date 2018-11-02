@@ -7,8 +7,6 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg19 import preprocess_input
 
 
-#TODO test preprocessing and postprocessing functions
-
 
 def load_img(path):
 
@@ -45,10 +43,13 @@ def postprocess_img(processed_img):
 
     img = processed_img.copy()
 
-    # Remove the batch dimension
-    img = np.squeeze(img, axis=0)
-
     # shape (1, h, w, d) to (h, w, d)
+    if len(img.shape) == 4:
+        img = np.squeeze(img, axis=0)
+    if len(img.shape) != 3:
+        raise ValueError("Invalid input to deprocessing image")
+
+    # Remove the batch dimension
     img[:, :, 0] += 103.939
     img[:, :, 1] += 116.779
     img[:, :, 2] += 123.68
@@ -64,11 +65,12 @@ def postprocess_img(processed_img):
 
 def show_img(img, title=None):
 
-    # Remove the batch dimension
-    out = np.squeeze(img, axis=0)
-
     # Normalize for display
-    out = out.astype('uint8')
+    out = img.astype('uint8')
+
+    # Remove the batch dimension
+    if len(img.shape) == 4:
+        out = np.squeeze(out, axis=0)
 
     if title is not None:
         plt.title(title)
