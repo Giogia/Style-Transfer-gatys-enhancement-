@@ -42,7 +42,7 @@ class VGG19:
             content_feature.append(self.vgg.get_layer(i).output)
 
         #using the Keras API we return the model of the CNN
-        
+
         return models.Model(self.vgg.input, style_feature + content_feature)
 
 
@@ -54,4 +54,3 @@ class VGG19:
 
 
 
-a = VGG19(1,2)
