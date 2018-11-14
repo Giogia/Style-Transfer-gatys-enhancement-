@@ -31,7 +31,7 @@ class VGG19:
     def get_content_features(self,img):
         return self.get_output_features(img)[0]
 
-    def get_style_featurers(self,img):
+    def get_style_features(self, img):
         return self.get_output_features(img)[1]
 
     def get_output_features(self,img):
