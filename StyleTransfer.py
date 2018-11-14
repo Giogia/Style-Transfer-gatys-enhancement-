@@ -14,7 +14,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     style = Image.preprocess_image(style)
     noise = Image.preprocess_image(noise)
 
-    noise = tfe.Variable(noise, dtype=tf.float32)
+    noise = tfe.Variable(content, dtype=tf.float32)
 
     # create model
     vgg = CNN.VGG19()
@@ -53,6 +53,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
             best_loss = loss
             best_img = Image.postprocess_image(noise.numpy())
 
+        print(loss,"best",best_loss)
         plot_img = noise.numpy()
         plot_img = Image.postprocess_image(plot_img)
         Image.show_image(plot_img)
