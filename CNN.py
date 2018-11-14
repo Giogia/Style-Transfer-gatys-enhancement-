@@ -24,16 +24,11 @@ class VGG19:
         for layer in self.model.layers:
             layer.trainable = False
 
-        self.content = self.model(self.content)
-
-        self.style = self.model(self.style)
-
     def get_content_features(self,img):
         return self.get_output_features(img)[0]
 
     def get_style_featurers(self,img):
         return self.get_output_features(img)[1]
-
 
     def get_output_features(self,img):
 
