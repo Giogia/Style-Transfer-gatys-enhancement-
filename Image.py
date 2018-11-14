@@ -79,6 +79,7 @@ def clip_image(img):
 
     img = tensorflow.clip_by_value(img, min_vals, max_vals)
 
+    return img
 
 
 def show_image(img, title=None):
