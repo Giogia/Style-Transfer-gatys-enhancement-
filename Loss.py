@@ -49,7 +49,7 @@ def compute_loss(noise_features, img_features, loss_w, layers_n):
     # Accumulate content losses from all layers
     content_score = accumulate_loss(img_features[0], layers_n[0], noise_features[0], get_content_loss)
     # Accumulate style losses from all layers
-    style_score = accumulate_loss(img_features[1], layers_n[1], noise_features[1], get_content_loss)
+    style_score = accumulate_loss(img_features[1], layers_n[1], noise_features[1], get_style_loss)
     # Here, we equally weight each contribution of each loss layer
     content_score *= loss_w[0]
     style_score *= loss_w[1]
