@@ -9,7 +9,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     content = Image.load_image(content_path)
     style = Image.load_image(style_path)
 
-    noise = Image.generate_noise_image()
+    noise = Image.generate_noise_image(content)
     noise = tfe.Variable(noise, dtype=tf.float32)
 
     # create model
@@ -55,6 +55,10 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
 
     return best_loss, best_img
 
+
+
+tf.enable_eager_execution()
+print("Eager execution: {}".format(tf.executing_eagerly()))
 
 content_path = '/Images/Picture1.jpg'
 style_path = '/Images/Picture2.jpg'
