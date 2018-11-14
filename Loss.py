@@ -4,7 +4,7 @@ import tensorflow as tf
 def g_matrix(tensor):
     channels = int(tensor.shape[-1])  # possible to use to static rep?
     a = tf.reshape(tensor, [-1, channels])  # reshape as 1-Dim array dividing it per channel
-    return tf.matmul(a, a, True) / tf.cast(tf.shape(a)[0], tf.float32)
+    return tf.matmul(a, a, transpose_a=True) / tf.cast(tf.shape(a)[0], tf.float32)
     # compute the matrix a*a^t and then divide by the dimension
 
 
@@ -18,16 +18,16 @@ def get_content_loss(content, target):
 
 def get_style_loss(style, g_target):
     g_style = g_matrix(style)
-    # height, width, channels = list(style.get_shape())
-    # weight = (4. * (channels ** 2) * (width * height) ** 2)
-    return tf.reduce_mean(tf.square(g_style - g_target))  # / weight
+    height, width, channels = list(style.get_shape())
+    #weight = (4. * (channels ** 2) * (width * height) ** 2)
+    return tf.reduce_mean(tf.square(g_style - g_target)) #/ weight
 
 
 def accumulate_loss(img_feature, layers_n, noise_feature, loss):
     score = 0
     weight_per_layer = 1.0 / float(layers_n)
     for target, comb_content in zip(img_feature, noise_feature):
-        score += weight_per_layer * loss(comb_content[0], target)
+        score += weight_per_layer * loss(comb_content, target)
     return score
 
 

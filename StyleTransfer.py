@@ -7,7 +7,7 @@ import Image
 import Loss
 
 
-def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=20):
+def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=25):
 
     #create images
     content = Image.load_image(content_path)
@@ -38,7 +38,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     #store best results
     best_loss, best_img = float('inf'), None
 
-    plt.ion()
+    #plt.ion()
     for i in range(iterations):
 
         print(i)
