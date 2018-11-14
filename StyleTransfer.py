@@ -50,16 +50,18 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
         clipped = Image.clip_image(noise)
         noise.assign(clipped)
 
+
         if loss < best_loss:
 
             # Update best loss and best image from total loss.
             best_loss = loss
             best_img = Image.postprocess_image(noise.numpy())
+        if i %10 == 0:
+            print(loss,"best",best_loss)
+            plot_img = noise.numpy()
+            plot_img = Image.postprocess_image(plot_img)
+            Image.show_image(plot_img)
 
-        print(loss,"best",best_loss)
-        plot_img = noise.numpy()
-        plot_img = Image.postprocess_image(plot_img)
-        Image.show_image(plot_img)
         plt.show()
 
     return best_loss, best_img

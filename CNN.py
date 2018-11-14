@@ -11,8 +11,8 @@ class VGG19_c:
 
         # here you say where you want to take the features for the style
 
-        self.styleLayers = ['block5_conv2']
-        self.contentLayers = ['block1_conv1',
+        self.contentLayers = ['block5_conv2']
+        self.styleLayers = ['block1_conv1',
                               'block2_conv1',   # here you say where you want to take the features for the content
                               'block3_conv1',
                               'block4_conv1',
