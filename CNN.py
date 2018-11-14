@@ -34,9 +34,8 @@ class VGG19:
     def get_style_features(self, img):
         return self.get_output_features(img)[1]
 
-    def get_output_features(self,img):
+    def get_output_features(self, content):
 
-        content = preprocess_image(img)
         features = self.model(content)
 
         # for the content take only the content layers from 0 to len of content
