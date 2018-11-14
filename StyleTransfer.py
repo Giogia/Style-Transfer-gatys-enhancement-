@@ -37,6 +37,6 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
 
     imgs = []
     for i in range(iterations):
-        grads, all_loss = Loss.compute_gradient(noise_features,img_features,loss_weights,layers_number)
+        grads, all_loss = Loss.compute_gradient(noise,noise_features,img_features,loss_weights,layers_number)
         loss, content_loss, style_loss = all_loss
         opt.apply_gradients([(grads, noise)])
