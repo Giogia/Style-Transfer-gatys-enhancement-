@@ -23,7 +23,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     gram_matrix_features = [Loss.g_matrix(feature) for feature in style_features]
 
     img_features = content_features, gram_matrix_features
-    noise_features = vgg.get_output_feature(noise)
+    noise_features = vgg.get_output_features(noise)
 
     #create optimizer
     opt = tf.train.AdamOptimizer(learning_rate, beta1=0.99, epsilon=1e-1)

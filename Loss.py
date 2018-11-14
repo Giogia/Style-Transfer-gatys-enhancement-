@@ -2,7 +2,7 @@ import tensorflow as tf
 
 
 def g_matrix(tensor):
-    channels = int(tensor.shape()[-1])  # possible to use to static rep?
+    channels = int(tensor.shape[-1])  # possible to use to static rep?
     a = tf.reshape(tensor, [-1, channels])  # reshape as 1-Dim array dividing it per channel
     return tf.matmul(a, a, True) / tf.cast(tf.shape(a)[0], tf.float32)
     # compute the matrix a*a^t and then divide by the dimension
