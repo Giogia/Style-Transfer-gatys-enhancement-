@@ -59,4 +59,4 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
 content_path = '/Images/Picture1.jpg'
 style_path = '/Images/Picture2.jpg'
 
-best, best_loss = run_style_transfer(content_path, style_path, num_iterations=1000)
+best, best_loss = run_style_transfer(content_path, style_path, iterations=1000)
