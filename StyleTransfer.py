@@ -19,7 +19,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     # create model
     vgg = CNN.VGG19()
     loss_weights = content_weight, style_weight
-    layers_number = vgg.content_layers_num
+    layers_number = vgg.content_layers_num , vgg.style_layers_num
 
     #create features
     content_features = vgg.get_content_features(content)
