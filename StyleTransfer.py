@@ -38,7 +38,9 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
 
     for i in range(iterations):
 
-        grads, loss = Loss.compute_gradient(noise,noise_features,img_features,loss_weights,layers_number)
+        print(i)
+
+        grads, loss = Loss.compute_gradient(noise,vgg.get_output_features,img_features,loss_weights,layers_number)
 
         opt.apply_gradients([(grads, noise)])
 
@@ -51,7 +53,6 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
             best_loss = loss
             best_img = Image.postprocess_image(noise.numpy())
 
-        print(i)
         plot_img = noise.numpy()
         plot_img = Image.postprocess_image(plot_img)
         Image.show_image(plot_img)

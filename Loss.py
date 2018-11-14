@@ -56,8 +56,8 @@ def compute_loss(noise_features, img_features, loss_w, layers_n):
     return style_score + content_score
 
 
-def compute_gradient(init_img, noise_features, img_features, loss_w, layers_n):
+def compute_gradient(noise_img, noise_features_gen, img_features, loss_w, layers_n):
     with tf.GradientTape() as g:
-        loss = compute_loss(noise_features, img_features, loss_w, layers_n)
+        loss = compute_loss(noise_features_gen(noise_img), img_features, loss_w, layers_n)
         # Compute gradients wrt input image
-    return g.gradient(loss, init_img), loss
+    return g.gradient(loss, noise_img), loss
