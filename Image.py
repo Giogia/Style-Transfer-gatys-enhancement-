@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
+import tensorflow
 
 from PIL import Image
 from tensorflow.keras.preprocessing import image
@@ -76,7 +77,7 @@ def clip_image(img):
     min_vals = -norm_means
     max_vals = 255 - norm_means
 
-    img = np.clip(img, min_vals, max_vals)
+    img = tensorflow.clip_by_value(img, min_vals, max_vals)
 
 
 
