@@ -15,6 +15,10 @@ class VGG19:
                               'block3_conv1',
                               'block4_conv1',
                               'block5_conv1']
+        self.content_layers_num = len(self.contentLayers)
+        self.style_layers_num = len(self.styleLayers)
+
+
 
 
         self.model = self.getModel()
@@ -37,11 +41,11 @@ class VGG19:
 
         # for the content take only the content layers from 0 to len of content
 
-        content = [style_content[0] for style_content in features[:len(self.contentLayers)]]
+        content = [style_content[0] for style_content in features[:self.content_layers_num]]
 
         # for style take only the style layers from len of content to len of content + len of style
 
-        style = [style[0] for style in features[len(self.contentLayers):]]
+        style = [style[0] for style in features[self.style_layers_num:]]
 
         return content, style
 
