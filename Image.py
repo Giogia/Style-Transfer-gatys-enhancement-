@@ -6,9 +6,6 @@ from PIL import Image
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg19 import preprocess_input
 
-from CNN import *
-
-
 
 def load_image(path):
 
@@ -118,11 +115,6 @@ def show_content_style(content_path, style_path):
 if __name__ == "__main__":
 
     show_content_style('/Images/Picture1.jpg','/Images/Picture2.jpg')
-
-    img = load_image('/Images/Picture1.jpg')
-    img2 = load_image('/Images/Picture2.jpg')
-
-    VGG19(img, img2)
 
 
     #Image flow test
