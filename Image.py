@@ -6,6 +6,8 @@ from PIL import Image
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.vgg19 import preprocess_input
 
+from CNN import *
+
 
 
 def load_image(path):
@@ -117,13 +119,19 @@ if __name__ == "__main__":
 
     show_content_style('/Images/Picture1.jpg','/Images/Picture2.jpg')
 
+    img = load_image('/Images/Picture1.jpg')
+    img2 = load_image('/Images/Picture2.jpg')
+
+    VGG19(img, img2)
+
+
     #Image flow test
 
     #img1 = load_image('/Images/Picture1.jpg')
     #img2 = generate_noise_image(img1)
     #img1 = preprocess_image(img1)
     #show_image(img1)
-    #plt.show
+    #plt.show()
     #img1 = postprocess_image(img1)
     #img2 = preprocess_image(img2)
     #show_image(img2)
