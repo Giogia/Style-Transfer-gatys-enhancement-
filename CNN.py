@@ -30,12 +30,12 @@ class VGG19:
 
         # for the content take only the content layers from 0 to len of content
 
-        self.content = [content[0] for content in range(0, len(self.contentLayers))]
+        self.content = [style_content[0] for style_content in self.content[:len(self.contentLayers)]]
 
         # for style take only the style layers from len of content to len of content + len of style
 
-        self.style = [content[0] for content in range(len(self.contentLayers),
-                                                      len(self.contentLayers) + len(self.styleLayers))]
+        self.style = [style[0] for style in self.style[len(self.contentLayers):]]
+
 
 
 
