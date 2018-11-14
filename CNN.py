@@ -1,9 +1,11 @@
-import tensorflow as tf
 import tensorflow.keras as models
-from Image import preprocess_image
-class VGG19:
+
+from tensorflow import enable_eager_execution
+from tensorflow.keras.applications.vgg19 import VGG19
+
+class VGG19_c:
     def __init__(self):
-        tf.enable_eager_execution()  # you enable eager eecution because we want the fow to be linear
+        enable_eager_execution()  # you enable eager eecution because we want the fow to be linear
 
 
 
@@ -40,11 +42,11 @@ class VGG19:
 
         # for the content take only the content layers from 0 to len of content
 
-        content = [style_content[0] for style_content in features[:self.content_layers_num]]
+        content = [style_content[0] for style_content in features[self.style_layers_num:]]
 
         # for style take only the style layers from len of content to len of content + len of style
 
-        style = [style[0] for style in features[self.style_layers_num:]]
+        style = [style[0] for style in features[:self.style_layers_num]]
 
         return content, style
 
@@ -60,14 +62,14 @@ class VGG19:
         # we load the VGG19 pretrained with the dataset imagenet and we don't include the 3 fully connected layers on
         # top of theVGG19
 
-        vgg = tf.keras.applications.vgg19.VGG19(include_top=False, weights='imagenet')
+        vgg = VGG19(include_top=False, weights='imagenet')
 
         # we freeze the weights and the variables
 
         vgg.trainable = False  # we load the VGG19 pretrained with the dataset imagenet and we don't include the 3 fully connected layers on
         # top of theVGG19
 
-        vgg = tf.keras.applications.vgg19.VGG19(include_top=False,   weights='imagenet')
+        vgg = VGG19(include_top=False, weights='imagenet')
 
         #we freeze the weights and the variables
 

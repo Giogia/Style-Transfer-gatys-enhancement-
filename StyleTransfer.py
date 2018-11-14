@@ -1,9 +1,13 @@
-import CNN, Image, Loss
-import tensorflow.contrib.eager as tfe
-import tensorflow as tf
 import matplotlib.pyplot as plt
+import tensorflow as tf
+import tensorflow.contrib.eager as tfe
 
-def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=5):
+import CNN
+import Image
+import Loss
+
+
+def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=20):
 
     #create images
     content = Image.load_image(content_path)
@@ -17,7 +21,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     noise = tfe.Variable(content, dtype=tf.float32)
 
     # create model
-    vgg = CNN.VGG19()
+    vgg = CNN.VGG19_c()
     loss_weights = content_weight, style_weight
     layers_number = vgg.content_layers_num , vgg.style_layers_num
 
@@ -27,7 +31,6 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     gram_matrix_features = [Loss.g_matrix(feature) for feature in style_features]
 
     img_features = content_features, gram_matrix_features
-    noise_features = vgg.get_output_features(noise)
 
     #create optimizer
     opt = tf.train.AdamOptimizer(learning_rate, beta1=0.99, epsilon=1e-1)
@@ -35,7 +38,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     #store best results
     best_loss, best_img = float('inf'), None
 
-
+    plt.ion()
     for i in range(iterations):
 
         print(i)
