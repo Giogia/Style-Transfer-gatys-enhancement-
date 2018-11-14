@@ -70,6 +70,15 @@ def postprocess_image(processed_img):
     return img
 
 
+def clip_image(img):
+
+    norm_means = np.array([103.939, 116.779, 123.68])
+    min_vals = -norm_means
+    max_vals = 255 - norm_means
+
+    img = np.clip(img, min_vals, max_vals)
+
+
 
 def show_image(img, title=None):
 
@@ -114,19 +123,19 @@ def show_content_style(content_path, style_path):
 
 if __name__ == "__main__":
 
-    show_content_style('/Images/Picture1.jpg','/Images/Picture2.jpg')
+    #show_content_style('/Images/Picture1.jpg','/Images/Picture2.jpg')
 
 
     #Image flow test
 
-    #img1 = load_image('/Images/Picture1.jpg')
-    #img2 = generate_noise_image(img1)
+    img1 = load_image('/Images/Picture1.jpg')
+    img2 = generate_noise_image(img1)
     #img1 = preprocess_image(img1)
     #show_image(img1)
     #plt.show()
     #img1 = postprocess_image(img1)
-    #img2 = preprocess_image(img2)
-    #show_image(img2)
-    #plt.show()
-    #img2 = postprocess_image(img2)
+    img2 = preprocess_image(img2)
+    img2 = postprocess_image(img2)
+    show_image(img2)
+    plt.show()
     #save_image('/Images/Test_Picture.jpg',img2)

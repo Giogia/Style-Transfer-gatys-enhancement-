@@ -1,7 +1,7 @@
 import CNN, Image, Loss
 import tensorflow.contrib.eager as tfe
 import tensorflow as tf
-import numpy as np
+import matplotlib.pyplot as plt
 
 def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=5):
 
@@ -31,12 +31,26 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
     #store best results
     best_loss, best_img = float('inf'), None
 
-    norm_means = np.array([103.939, 116.779, 123.68])
-    min_vals = -norm_means
-    max_vals = 255 - norm_means
 
-    imgs = []
     for i in range(iterations):
-        grads, all_loss = Loss.compute_gradient(noise,noise_features,img_features,loss_weights,layers_number)
-        loss, content_loss, style_loss = all_loss
+
+        grads, loss = Loss.compute_gradient(noise,noise_features,img_features,loss_weights,layers_number)
+
         opt.apply_gradients([(grads, noise)])
+
+        clipped = Image.clip_image(noise)
+        noise.assign(clipped)
+
+        if loss < best_loss:
+
+            # Update best loss and best image from total loss.
+            best_loss = loss
+            best_img = Image.postprocess_image(noise.numpy())
+
+        print(i)
+        plot_img = noise.numpy()
+        plot_img = Image.postprocess_image(plot_img)
+        Image.show_image(plot_img)
+        plt.show()
+
+    return best_loss, best_img
