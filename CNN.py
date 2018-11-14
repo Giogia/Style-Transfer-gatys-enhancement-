@@ -37,7 +37,8 @@ class VGG19:
         self.style = [style[0] for style in self.style[len(self.contentLayers):]]
 
 
-
+    def getOutput(self,img):
+        return self.model(img)
 
     def getModel(self):
 
