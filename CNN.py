@@ -2,12 +2,10 @@ import tensorflow as tf
 import tensorflow.keras as models
 from Image import preprocess_image
 class VGG19:
-    def __init__(self, content, style):
+    def __init__(self):
         tf.enable_eager_execution()  # you enable eager eecution because we want the fow to be linear
 
-        self.content = preprocess_image(content)
 
-        self.style = preprocess_image(style)
 
         # here you say where you want to take the features for the style
 
@@ -17,6 +15,8 @@ class VGG19:
                               'block3_conv1',
                               'block4_conv1',
                               'block5_conv1']
+
+
         self.model = self.getModel()
 
         # after setting model not trainable we also set the layers not trainable
@@ -28,17 +28,29 @@ class VGG19:
 
         self.style = self.model(self.style)
 
+
+
+    def get_output_feature(self,img):
+
+        content = preprocess_image(img)
+        features = self.model(content)
+
         # for the content take only the content layers from 0 to len of content
 
-        self.content = [style_content[0] for style_content in self.content[:len(self.contentLayers)]]
+        content = [style_content[0] for style_content in features[:len(self.contentLayers)]]
 
         # for style take only the style layers from len of content to len of content + len of style
 
-        self.style = [style[0] for style in self.style[len(self.contentLayers):]]
+        style = [style[0] for style in features[len(self.contentLayers):]]
+
+        return content, style
 
 
-    def getOutput(self,img):
-        return self.model(img)
+
+
+
+
+
 
     def getModel(self):
 
