@@ -14,16 +14,17 @@ def g_matrix(tensor):
 
 def get_content_loss(content, target):
 
-    return tf.reduce_mean(tf.square(content - target))
+    return tf.reduce_mean(0.5*tf.square(content - target))
 
 
 def get_style_loss(style, g_target):
 
     g_style = g_matrix(style)
     height, width, channels = style.get_shape().as_list()
-    weight = (4 * (channels ** 2) * (width * height) ** 2)
+    weight = 4*(channels ** 2)*((height*width)**2)
 
-    return tf.reduce_mean(tf.square(g_style - g_target)) / weight
+
+    return tf.reduce_mean(tf.square(g_style - g_target))/weight
 
 
 def accumulate_loss(img_feature, layers_n, noise_feature, loss):

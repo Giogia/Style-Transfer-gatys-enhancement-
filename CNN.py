@@ -8,7 +8,7 @@ class VGG19_c:
     def __init__(self):
 
         # here you say where you want to take the features for the content
-        self.contentLayers = ['block5_conv2']
+        self.contentLayers = ['block4_conv2']
 
         # here you say where you want to take the features for the style
         self.styleLayers = ['block1_conv1',
@@ -58,11 +58,10 @@ class VGG19_c:
         vgg.trainable = False
 
         style_feature = []
-
         for i in self.styleLayers:
             style_feature.append(vgg.get_layer(i).output)
-        content_feature = []
 
+        content_feature = []
         for i in self.contentLayers:
             content_feature.append(vgg.get_layer(i).output)
 
