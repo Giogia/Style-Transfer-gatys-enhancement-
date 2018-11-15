@@ -7,7 +7,7 @@ import Image
 import Loss
 
 
-def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=5):
+def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=30):
 
     #create images
     content = Image.load_image(content_path)
@@ -56,7 +56,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
             # Update best loss and best image from total loss.
             best_loss = loss
             best_img = Image.postprocess_image(noise.numpy())
-        if i %50 == 0:
+        if i %10 == 0:
             print(loss,"best",best_loss)
             plot_img = noise.numpy()
             plot_img = Image.postprocess_image(plot_img)
@@ -74,9 +74,9 @@ if __name__ == "__main__":
     tf.enable_eager_execution()
     print("Eager execution: {}".format(tf.executing_eagerly()))
 
-    content_path = '/Images/Picture1.jpg'
-    style_path = '/Images/Picture2.jpg'
+    content_path = '/Images/Eiffel.jpg'
+    style_path = '/Images/VanGogh.jpg'
 
-    Image.show_content_style('/Images/Picture1.jpg', '/Images/Picture2.jpg')
+    Image.show_content_style(content_path, style_path)
 
     best, best_loss = run_style_transfer(content_path, style_path, iterations=1000)
