@@ -64,7 +64,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
 
         plt.show()
 
-    Image.save_image('/Images/Result.jpg',best)
+    Image.save_image('/Images/Result.jpg',best_img)
 
     return best_loss, best_img
 
