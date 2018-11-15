@@ -64,14 +64,17 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
 
         plt.show()
 
+    Image.save_image('/Images/Result.jpg',best)
+
     return best_loss, best_img
 
 
+if __name__ == "__main__":
 
-tf.enable_eager_execution()
-print("Eager execution: {}".format(tf.executing_eagerly()))
+    tf.enable_eager_execution()
+    print("Eager execution: {}".format(tf.executing_eagerly()))
 
-content_path = '/Images/Picture1.jpg'
-style_path = '/Images/Picture2.jpg'
+    content_path = '/Images/Picture1.jpg'
+    style_path = '/Images/Picture2.jpg'
 
-best, best_loss = run_style_transfer(content_path, style_path, iterations=1000)
+    best, best_loss = run_style_transfer(content_path, style_path, iterations=1000)
