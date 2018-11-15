@@ -77,4 +77,6 @@ if __name__ == "__main__":
     content_path = '/Images/Picture1.jpg'
     style_path = '/Images/Picture2.jpg'
 
+    Image.show_content_style('/Images/Picture1.jpg', '/Images/Picture2.jpg')
+
     best, best_loss = run_style_transfer(content_path, style_path, iterations=1000)

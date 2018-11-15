@@ -1,5 +1,4 @@
 import os
-
 import matplotlib.pyplot as plt
 
 from tensorflow import clip_by_value
@@ -27,14 +26,11 @@ def load_image(path):
     return img
 
 
-
 def save_image(path, img):
 
     img = Image.fromarray(clip(img, 0, 255).astype('uint8'))
-
     path = os.getcwd() + path
     img.save(path, 'JPEG')
-
 
 
 def preprocess_image(img):
@@ -45,7 +41,6 @@ def preprocess_image(img):
     img = preprocess_input(img)
 
     return img
-
 
 
 def postprocess_image(processed_img):
@@ -98,13 +93,11 @@ def show_image(img, title=None):
     plt.imshow(out)
 
 
-
 def generate_noise_image(img):
 
     img = random.uniform(-20,20,img.shape).astype('uint8')
 
     return img
-
 
 
 def show_content_style(content_path, style_path):
@@ -121,24 +114,3 @@ def show_content_style(content_path, style_path):
     show_image(style, 'Style')
 
     plt.show()
-
-
-
-if __name__ == "__main__":
-
-    #show_content_style('/Images/Picture1.jpg','/Images/Picture2.jpg')
-
-
-    #Image flow test
-
-    img1 = load_image('/Images/Picture1.jpg')
-    img2 = generate_noise_image(img1)
-    #img1 = preprocess_image(img1)
-    #show_image(img1)
-    #plt.show()
-    #img1 = postprocess_image(img1)
-    img2 = preprocess_image(img2)
-    img2 = postprocess_image(img2)
-    show_image(img2)
-    plt.show()
-    #save_image('/Images/Test_Picture.jpg',img2)
