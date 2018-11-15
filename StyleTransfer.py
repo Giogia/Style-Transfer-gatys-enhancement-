@@ -7,7 +7,7 @@ import Image
 import Loss
 
 
-def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=30):
+def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e3, style_weight=1e-2, learning_rate=5):
 
     #create images
     content = Image.load_image(content_path)
@@ -56,7 +56,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
             # Update best loss and best image from total loss.
             best_loss = loss
             best_img = Image.postprocess_image(noise.numpy())
-        if i %10 == 0:
+        if i %100 == 0:
             print(loss,"best",best_loss)
             plot_img = noise.numpy()
             plot_img = Image.postprocess_image(plot_img)
