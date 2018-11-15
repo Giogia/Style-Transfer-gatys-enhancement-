@@ -12,11 +12,6 @@ def g_matrix(tensor):
     return tf.matmul(a, a, transpose_a=True) / tf.cast(tf.shape(a)[0], tf.float32)
 
 
-
-"""If one or both of the matrices contain a lot of zeros, a more efficient multiplication 
-algorithm can be used by setting the corresponding a_is_sparse or b_is_sparse flag to True"""
-
-
 def get_content_loss(content, target):
 
     return tf.reduce_mean(tf.square(content - target))
