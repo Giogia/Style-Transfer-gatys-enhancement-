@@ -7,7 +7,7 @@ import Image
 import Loss
 
 
-def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e-1, style_weight=1e8, learning_rate=5):
+def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e0, style_weight=1e2, learning_rate=5):
 
     #create images
     content = Image.load_image(content_path)

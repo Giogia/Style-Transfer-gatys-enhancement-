@@ -8,7 +8,7 @@ class VGG19_c:
     def __init__(self):
 
         # here you say where you want to take the features for the content
-        self.contentLayers = ['block4_conv2']
+        self.contentLayers = ['block4_csonv2']
 
         # here you say where you want to take the features for the style
         self.styleLayers = ['block1_conv1',
