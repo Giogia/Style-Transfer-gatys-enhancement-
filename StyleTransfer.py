@@ -7,7 +7,7 @@ import Image
 import Loss
 
 
-def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e-1, style_weight=1e9, learning_rate=5):
+def run_style_transfer(content_path, style_path, iterations=1000, content_weight=1e-1, style_weight=1e8, learning_rate=5):
 
     #create images
     content = Image.load_image(content_path)
@@ -74,8 +74,8 @@ if __name__ == "__main__":
     tf.enable_eager_execution()
     print("Eager execution: {}".format(tf.executing_eagerly()))
 
-    content_path = '/Images/Eiffel.jpg'
-    style_path = '/Images/VanGogh.jpg'
+    content_path = '/Images/Country.jpg'
+    style_path = '/Images/Munch.jpg'
 
     Image.show_content_style(content_path, style_path)
 
