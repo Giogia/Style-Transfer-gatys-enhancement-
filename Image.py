@@ -10,16 +10,18 @@ from tensorflow.keras.applications.vgg19 import preprocess_input
 
 def load_image(path):
 
-    max_dim = 512
+    max_dim = 1024
 
     path = os.getcwd() + path
     img = Image.open(path)
 
     # resize image to max_dim
     scale = max_dim / max(img.size)
-    scaled_width = round(img.size[0] * scale)
-    scaled_height = round(img.size[1] * scale)
-    img = img.resize((scaled_width, scaled_height))
+
+    if scale < 1:
+        scaled_width = round(img.size[0] * scale)
+        scaled_height = round(img.size[1] * scale)
+        img = img.resize((scaled_width, scaled_height))
 
     img = img_to_array(img)
 
