@@ -23,6 +23,9 @@ def load_image(path):
         scaled_height = round(img.size[1] * scale)
         img = img.resize((scaled_width, scaled_height))
 
+    #convert greyscale to rgb
+    img = img.convert("RGB")
+
     img = img_to_array(img)
 
     return img
