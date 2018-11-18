@@ -1,14 +1,15 @@
 import tensorflow as tf
 import os
 from Image import show_content_style, show_image
+from pathlib import Path
 from ImageStyleTransfer import image_style_transfer
 from VideoStyleTransfer import video_style_transfer
 
 PATH = os.getcwd()
-IMAGES_PATH = PATH + '/Images'
-VIDEOS_PATH = PATH + '/Videos'
-MODELS_PATH = PATH + '/Models'
-RESULTS_PATH = PATH + '/Results'
+IMAGES_PATH = Path(PATH + '/Images')
+VIDEOS_PATH = Path(PATH + '/Videos')
+MODELS_PATH = Path(PATH + '/Models')
+RESULTS_PATH = Path(PATH + '/Results')
 
 
 def find_file(filename, directory):
@@ -37,7 +38,7 @@ if __name__ == "__main__":
             print(os.path.splitext(file)[0])
 
         content = find_file(input(),IMAGES_PATH)
-        content_path  = IMAGES_PATH + "/" + content
+        content_path  = Path(IMAGES_PATH + "/" + content)
 
         print("Select Style Image:")
 
@@ -45,10 +46,10 @@ if __name__ == "__main__":
             print(os.path.splitext(file)[0])
 
         style = find_file(input(),IMAGES_PATH)
-        style_path = IMAGES_PATH + "/" + style
+        style_path = Path(IMAGES_PATH + "/" + style)
 
         output =  'Result' + '_' + os.path.splitext(content)[0] + '_' + os.path.splitext(style)[0]
-        output_path = RESULTS_PATH + "/" + output + ".jpg"
+        output_path = Path(RESULTS_PATH + "/" + output + ".jpg")
 
 
         show_content_style(content_path, style_path)
@@ -71,7 +72,7 @@ if __name__ == "__main__":
             print(os.path.splitext(file)[0])
 
         content = find_file(input(),VIDEOS_PATH)
-        content_path  = VIDEOS_PATH + "/" + content
+        content_path  = Path(VIDEOS_PATH + "/" + content)
 
         print("Select Style Model:")
 
@@ -79,10 +80,10 @@ if __name__ == "__main__":
             print(os.path.splitext(file)[0])
 
         model = find_file(input(),MODELS_PATH)
-        model_path = MODELS_PATH + "/" + model
+        model_path = Path(MODELS_PATH + "/" + model)
 
         output =  'Result' + '_' + os.path.splitext(content)[0] + '_' + os.path.splitext(model)[0]
-        output_path = RESULTS_PATH + "/" + output + ".mp4"
+        output_path = Path(RESULTS_PATH + "/" + output + ".mp4")
 
         print("Please wait, ignore tensorflow binary value warning")
         video_style_transfer(content_path, model_path, output_path, batch_s=4)

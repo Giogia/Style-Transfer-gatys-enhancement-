@@ -53,6 +53,6 @@ def video_style_transfer(input_path, model_path, output_path, batch_s=4):
             for r in r_res:
                 video_w.write_frame(np.clip(r, 0, 255).astype(np.uint8))
                 # TODO check for the line above
-            print("processed " + str(i+1) + " out of " + str(len(video_wip)) + " batches \r")
+            print("processed " + str(i+1) + " out of " + str(len(video_wip)) + " batches", end = '\r')
 
         video_w.close()
