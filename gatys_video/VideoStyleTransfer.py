@@ -3,7 +3,7 @@ import os
 import moviepy.video.io.ffmpeg_writer as ffmpeg_writer
 import numpy as np
 import tensorflow as tf
-import transform
+import Transform
 
 
 from moviepy.video.io.VideoFileClip import VideoFileClip
@@ -13,7 +13,7 @@ EX = Exception("Please provide a model")
 P_DIR = os.getcwd() + "/Models/"
 
 
-def ffwd_video(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4):
+def video_style_transfer(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4):
     video = VideoFileClip(input_file, audio=False)
     video_w = ffmpeg_writer.FFMPEG_VideoWriter(output_file, video.size, video.fps, codec="libx264",
                                                preset="medium", bitrate="2000k",
@@ -30,7 +30,7 @@ def ffwd_video(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4):
 
         video_wip = np.array(batch_l, dtype=np.float32)
         place_holder = tf.placeholder(tf.float32, shape=video_wip.shape[1:], name='place_holder')
-        wip = transform.net(place_holder)
+        wip = Transform.net(place_holder)
 
         p_loader = tf.train.Saver()
 
@@ -58,4 +58,4 @@ def ffwd_video(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4):
         video_w.close()
 
 path = os.getcwd() + "/Videos/Movie.mov"
-ffwd_video(path, os.getcwd() +"/Videos/Result.mp4", "wave.ckpt")
+video_style_transfer(path, os.getcwd() + "/Videos/Result.mp4", "wave.ckpt")
