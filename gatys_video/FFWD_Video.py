@@ -4,6 +4,8 @@ import moviepy.video.io.ffmpeg_writer as ffmpeg_writer
 import numpy as np
 import tensorflow as tf
 import transform
+
+
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 DEVICE = '/gpu:0'
@@ -50,3 +52,6 @@ def ffwd_video(input_file, output_file, p_dir, batch_s=4):
             # TODO check for the line above
 
         video_w.close()
+
+path = os.getcwd() + "/Videos/Intro Vans.mp4"
+ffwd_video(path,"/Videos/Result.mp4","/Models/rain_princess.ckpt")

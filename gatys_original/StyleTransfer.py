@@ -16,7 +16,7 @@ def run_style_transfer(content_path, style_path, iterations=1000, content_weight
 
     content = Image.preprocess_image(content)
     style = Image.preprocess_image(style)
-    noise = preprocess_image(noise)
+    noise = Image.preprocess_image(noise)
     percentage = 0
     noise = percentage * noise + (1 - percentage) * content
 
