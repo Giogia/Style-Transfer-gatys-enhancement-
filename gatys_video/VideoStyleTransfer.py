@@ -14,6 +14,7 @@ P_DIR = os.getcwd() + "/Models/"
 
 
 def video_style_transfer(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4):
+
     video = VideoFileClip(input_file, audio=False)
     video_w = ffmpeg_writer.FFMPEG_VideoWriter(output_file, video.size, video.fps, codec="libx264",
                                                preset="medium", bitrate="2000k",
