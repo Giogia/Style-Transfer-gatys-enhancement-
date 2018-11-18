@@ -38,6 +38,7 @@ def video_style_transfer(input_path, model_path, output_path, batch_s=4):
             is_valid = model.model_checkpoint_path
 
             if model is not None and is_valid:
+                print("Loading model, it may take some time")
                 p_loader.restore(session, is_valid)
             else:
                 raise EX
@@ -52,7 +53,6 @@ def video_style_transfer(input_path, model_path, output_path, batch_s=4):
             r_res = session.run(wip, feed_dict={place_holder: video_wip[i]})
             for r in r_res:
                 video_w.write_frame(np.clip(r, 0, 255).astype(np.uint8))
-                # TODO check for the line above
             print("processed " + str(i+1) + " out of " + str(len(video_wip)) + " batches", end = '\r')
 
         video_w.close()
