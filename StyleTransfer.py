@@ -6,10 +6,10 @@ from ImageStyleTransfer import image_style_transfer
 from VideoStyleTransfer import video_style_transfer
 
 PATH = os.getcwd()
-IMAGES_PATH = Path(PATH + '/Images')
-VIDEOS_PATH = Path(PATH + '/Videos')
-MODELS_PATH = Path(PATH + '/Models')
-RESULTS_PATH = Path(PATH + '/Results')
+IMAGES_PATH = PATH + '/Images'
+VIDEOS_PATH = PATH + '/Videos'
+MODELS_PATH = PATH + '/Models'
+RESULTS_PATH = PATH + '/Results'
 
 
 def find_file(filename, directory):
@@ -34,18 +34,18 @@ if __name__ == "__main__":
 
         print("Select Content Image:")
 
-        for file in os.listdir(IMAGES_PATH):
+        for file in os.listdir(Path(IMAGES_PATH)):
             print(os.path.splitext(file)[0])
 
-        content = find_file(input(),IMAGES_PATH)
+        content = find_file(input(),Path(IMAGES_PATH))
         content_path  = Path(IMAGES_PATH + "/" + content)
 
         print("Select Style Image:")
 
-        for file in os.listdir(IMAGES_PATH):
+        for file in os.listdir(Path(IMAGES_PATH)):
             print(os.path.splitext(file)[0])
 
-        style = find_file(input(),IMAGES_PATH)
+        style = find_file(input(),Path(IMAGES_PATH))
         style_path = Path(IMAGES_PATH + "/" + style)
 
         output =  'Result' + '_' + os.path.splitext(content)[0] + '_' + os.path.splitext(style)[0]
@@ -68,25 +68,25 @@ if __name__ == "__main__":
 
         print("Select Content Video:")
 
-        for file in os.listdir(VIDEOS_PATH):
+        for file in os.listdir(Path(VIDEOS_PATH)):
             print(os.path.splitext(file)[0])
 
-        content = find_file(input(),VIDEOS_PATH)
+        content = find_file(input(),Path(VIDEOS_PATH))
         content_path  = Path(VIDEOS_PATH + "/" + content)
 
         print("Select Style Model:")
 
-        for file in os.listdir(MODELS_PATH):
+        for file in os.listdir(Path(MODELS_PATH)):
             print(os.path.splitext(file)[0])
 
-        model = find_file(input(),MODELS_PATH)
+        model = find_file(input(),Path(MODELS_PATH))
         model_path = Path(MODELS_PATH + "/" + model)
 
         output =  'Result' + '_' + os.path.splitext(content)[0] + '_' + os.path.splitext(model)[0]
         output_path = Path(RESULTS_PATH + "/" + output + ".mp4")
 
         print("Please wait, ignore tensorflow binary value warning")
-        video_style_transfer(content_path, model_path, output_path, batch_s=4)
+        video_style_transfer(str(content_path), str(model_path), str(output_path), batch_s=4)
 
         print("video saved in Results folder")
 
