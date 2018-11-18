@@ -7,7 +7,7 @@ import Image
 import Loss
 
 
-def image_style_transfer(content_path, style_path, iterations=1000, content_weight=1e0, style_weight=1e2, learning_rate=5):
+def image_style_transfer(content_path, style_path, output_path, iterations=1000, content_weight=1e0, style_weight=1e2, learning_rate=5):
 
     #create images
     content = Image.load_image(content_path)
@@ -66,19 +66,6 @@ def image_style_transfer(content_path, style_path, iterations=1000, content_weig
 
         plt.show()
 
-    Image.save_image('/Images/Result.jpg',best_img)
+    Image.save_image(output_path,best_img)
 
     return best_loss, best_img
-
-
-if __name__ == "__main__":
-
-    tf.enable_eager_execution()
-    print("Eager execution: {}".format(tf.executing_eagerly()))
-
-    content_path = '/Images/Country.jpg'
-    style_path = '/Images/Munch.jpg'
-
-    Image.show_content_style(content_path, style_path)
-
-    best, best_loss = image_style_transfer(content_path, style_path, iterations=1000)

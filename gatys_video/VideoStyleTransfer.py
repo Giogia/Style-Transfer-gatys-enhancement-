@@ -58,5 +58,5 @@ def video_style_transfer(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4
 
         video_w.close()
 
-path = os.getcwd() + "/Videos/Movie.mov"
-video_style_transfer(path, os.getcwd() + "/Videos/Result.mp4", "wave.ckpt")
+#path = os.getcwd() + "/gatys_video/Videos/Movie.mov"
+#video_style_transfer(path, os.getcwd() + "/Videos/Result.mp4", "wave.ckpt")

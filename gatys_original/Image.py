@@ -1,4 +1,3 @@
-import os
 import matplotlib.pyplot as plt
 
 from tensorflow import clip_by_value
@@ -12,7 +11,6 @@ def load_image(path):
 
     max_dim = 1024
 
-    path = os.getcwd() + path
     img = Image.open(path)
 
     # resize image to max_dim
@@ -34,7 +32,6 @@ def load_image(path):
 def save_image(path, img):
 
     img = Image.fromarray(clip(img, 0, 255).astype('uint8'))
-    path = os.getcwd() + path
     img.save(path, 'JPEG')
 
 
