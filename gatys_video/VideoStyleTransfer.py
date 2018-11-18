@@ -5,22 +5,19 @@ import numpy as np
 import tensorflow as tf
 import Transform
 
-
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 DEVICE = '/gpu:0'
 EX = Exception("Please provide a model")
-P_DIR = os.getcwd() + "/Models/"
 
 
-def video_style_transfer(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4):
+def video_style_transfer(input_path, output_path, model_path, batch_s=4):
 
-    video = VideoFileClip(input_file, audio=False)
-    video_w = ffmpeg_writer.FFMPEG_VideoWriter(output_file, video.size, video.fps, codec="libx264",
+    video = VideoFileClip(input_path, audio=False)
+    video_w = ffmpeg_writer.FFMPEG_VideoWriter(output_path, video.size, video.fps, codec="libx264",
                                                preset="medium", bitrate="2000k",
-                                               audiofile=input_file, threads=None,
+                                               audiofile=input_path, threads=None,
                                                ffmpeg_params=None)
-    p_dir +=p_file
 
     with tf.Graph().as_default(), tf.Session() as session:
 
@@ -35,15 +32,15 @@ def video_style_transfer(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4
 
         p_loader = tf.train.Saver()
 
-        if os.path.isdir(p_dir):
-            model = tf.train.get_checkpoint_state(p_dir)
+        if os.path.isdir(model_path):
+            model = tf.train.get_checkpoint_state(model_path)
             is_valid = model.model_checkpoint_path
             if model is not None and is_valid:
                 p_loader.restore(session, is_valid)
             else:
                 raise EX
         else:
-            p_loader.restore(session, p_dir)
+            p_loader.restore(session, model_path)
 
         # The information about size in the video files are: 'width, height'
         # In *** the dimensions are 'height, width'
@@ -57,6 +54,3 @@ def video_style_transfer(input_file, output_file, p_file, p_dir=P_DIR, batch_s=4
             print("processed " + str(i+1) + " out of " + str(len(video_wip)) + " batches")
 
         video_w.close()
-
-#path = os.getcwd() + "/gatys_video/Videos/Movie.mov"
-#video_style_transfer(path, os.getcwd() + "/Videos/Result.mp4", "wave.ckpt")
