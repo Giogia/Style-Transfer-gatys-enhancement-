@@ -43,7 +43,7 @@ def image_style_transfer(content_path, style_path, output_path, iterations=1000,
     #plt.ion()
     for i in range(iterations):
 
-        print(i)
+        print(str(i)+"\r")
 
         grads, loss = Loss.compute_gradient(noise,vgg.get_output_features,img_features,loss_weights,layers_number)
 
@@ -58,13 +58,13 @@ def image_style_transfer(content_path, style_path, output_path, iterations=1000,
             # Update best loss and best image from total loss.
             best_loss = loss
             best_img = Image.postprocess_image(noise.numpy())
-        if i %10 == 0:
+
+        if i %100 == 0:
             print(loss,"best",best_loss)
             plot_img = noise.numpy()
             plot_img = Image.postprocess_image(plot_img)
             Image.show_image(plot_img)
-
-        plt.show()
+            plt.show()
 
     Image.save_image(output_path,best_img)
 

@@ -11,7 +11,7 @@ DEVICE = '/gpu:0'
 EX = Exception("Please provide a model")
 
 
-def video_style_transfer(input_path, output_path, model_path, batch_s=4):
+def video_style_transfer(input_path, model_path, output_path, batch_s=4):
 
     video = VideoFileClip(input_path, audio=False)
     video_w = ffmpeg_writer.FFMPEG_VideoWriter(output_path, video.size, video.fps, codec="libx264",
@@ -33,8 +33,10 @@ def video_style_transfer(input_path, output_path, model_path, batch_s=4):
         p_loader = tf.train.Saver()
 
         if os.path.isdir(model_path):
+
             model = tf.train.get_checkpoint_state(model_path)
             is_valid = model.model_checkpoint_path
+
             if model is not None and is_valid:
                 p_loader.restore(session, is_valid)
             else:
@@ -51,6 +53,6 @@ def video_style_transfer(input_path, output_path, model_path, batch_s=4):
             for r in r_res:
                 video_w.write_frame(np.clip(r, 0, 255).astype(np.uint8))
                 # TODO check for the line above
-            print("processed " + str(i+1) + " out of " + str(len(video_wip)) + " batches")
+            print("processed " + str(i+1) + " out of " + str(len(video_wip)) + " batches \r")
 
         video_w.close()
