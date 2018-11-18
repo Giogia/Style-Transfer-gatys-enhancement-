@@ -15,7 +15,7 @@ def net(image):
     resid5 = residual_block(resid4, 3)
     conv_t1 = conv_tranpose_layer(resid5, 64, 3, 2)
     conv_t2 = conv_tranpose_layer(conv_t1, 32, 3, 2)
-    conv_t3 = conv_layer(conv_t2, 3, 9, 1, relu=False)
+    conv_t3 = conv_layer(conv_t2, 3, 9, 1, is_relu=False)
     preds = tf.nn.tanh(conv_t3) * 150 + 255./2
     return preds
 
@@ -31,7 +31,7 @@ def conv_layer(image, filter_number, filter_size, strides, is_relu=True):
 
     image = tf.nn.conv2d(image, weights_initialization, strides_shape, padding='SAME')
 
-    image = _instance_norm(net)
+    image = _instance_norm(image)
 
     if is_relu:
 
@@ -55,9 +55,9 @@ def conv_tranpose_layer(img, filter_number, filter_size, strides):
 
     convolution = tf.nn.conv2d_transpose(img, weights_initialized, tf_shape, strides_shape, padding='SAME')
 
-    convolution = _instance_norm(net)
+    convolution = _instance_norm(convolution)
 
-    return tf.nn.relu(net)
+    return tf.nn.relu(convolution)
 
 
 def residual_block(img, filter_size=3):
@@ -65,7 +65,7 @@ def residual_block(img, filter_size=3):
 
     # here we add the convolution to the original image
 
-    return img + conv_layer(tmp_convolution, 128, filter_size, 1, relu=False)
+    return img + conv_layer(tmp_convolution, 128, filter_size, 1, is_relu=False)
 
 
 def _instance_norm(img, train=True):
