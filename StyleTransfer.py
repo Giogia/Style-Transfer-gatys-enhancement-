@@ -55,10 +55,9 @@ if __name__ == "__main__":
         show_content_style(content_path, style_path)
 
         print("Please wait, ignore tensorflow binary value warning")
-        best_img, best_loss = image_style_transfer(content_path, style_path, output_path, iterations=1)
+        best_loss, best_img = image_style_transfer(content_path, style_path, output_path, iterations=3)
 
-        print("Final Loss: " + best_loss.numpy)
-
+        print("Final Loss: " + str(best_loss.numpy()))
         show_image(best_img, output)
 
         print("image saved in Results folder")
