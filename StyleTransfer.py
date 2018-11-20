@@ -28,7 +28,7 @@ def list_files(path):
 
 def check_error(var, path):
     while (var == None):
-        print("Please insert a correct Name")
+        print("Please insert a correct Name (case sensitive)")
         list_files(path)
         var = find_file(input(), Path(path))
 
