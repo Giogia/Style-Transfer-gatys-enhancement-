@@ -26,6 +26,7 @@ def video_style_transfer(input_path, model_path, output_path, batch_s=4):
         while len(batch_l[-1]) < batch_s:
             batch_l[-1].append(batch_l[-1][-1])
 
+        print("Loading model, it may take some time")
         video_wip = np.array(batch_l, dtype=np.float32)
         place_holder = tf.placeholder(tf.float32, shape=video_wip.shape[1:], name='place_holder')
         wip = Transform.net(place_holder)
@@ -38,7 +39,6 @@ def video_style_transfer(input_path, model_path, output_path, batch_s=4):
             is_valid = model.model_checkpoint_path
 
             if model is not None and is_valid:
-                print("Loading model, it may take some time")
                 p_loader.restore(session, is_valid)
             else:
                 raise EX
