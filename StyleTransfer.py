@@ -82,18 +82,18 @@ if __name__ == "__main__":
 
         print("Select Content Video:")
 
-        for file in os.listdir(Path(VIDEOS_PATH)):
-            print(os.path.splitext(file)[0])
+        list_files(VIDEOS_PATH)
 
-        content = find_file(input(),Path(VIDEOS_PATH))
-        content_path  = Path(VIDEOS_PATH + "/" + content)
+        content = find_file(input(), Path(VIDEOS_PATH))
+        content = check_error(content, VIDEOS_PATH)
+        content_path = Path(VIDEOS_PATH + "/" + content)
 
         print("Select Style Model:")
 
-        for file in os.listdir(Path(MODELS_PATH)):
-            print(os.path.splitext(file)[0])
+        list_files(MODELS_PATH)
 
-        model = find_file(input(),Path(MODELS_PATH))
+        model = find_file(input(), Path(MODELS_PATH))
+        model = check_error(model, MODELS_PATH)
         model_path = Path(MODELS_PATH + "/" + model)
 
         output =  'Result' + '_' + os.path.splitext(content)[0] + '_' + os.path.splitext(model)[0]
