@@ -1,5 +1,6 @@
 import tensorflow as tf
 import os
+import matplotlib as plt
 from Image import show_content_style, show_image
 from pathlib import Path
 from ImageStyleTransfer import image_style_transfer
@@ -20,6 +21,20 @@ def find_file(filename, directory):
     raise Exception("File not found")
 
 
+def list_files(path):
+    for file in os.listdir(Path(path)):
+        print(os.path.splitext(file)[0])
+
+
+def check_error(var, path):
+    while (var == None):
+        print("Please insert a correct Name")
+        list_files(path)
+        var = find_file(input(), Path(path))
+
+    return var
+
+
 if __name__ == "__main__":
 
     tf.enable_eager_execution()
@@ -34,23 +49,22 @@ if __name__ == "__main__":
 
         print("Select Content Image:")
 
-        for file in os.listdir(Path(IMAGES_PATH)):
-            print(os.path.splitext(file)[0])
+        list_files(IMAGES_PATH)
 
-        content = find_file(input(),Path(IMAGES_PATH))
-        content_path  = Path(IMAGES_PATH + "/" + content)
+        content = find_file(input(), Path(IMAGES_PATH))
+        content = check_error(content, IMAGES_PATH)
+        content_path = Path(IMAGES_PATH + "/" + content)
 
         print("Select Style Image:")
 
-        for file in os.listdir(Path(IMAGES_PATH)):
-            print(os.path.splitext(file)[0])
+        list_files(IMAGES_PATH)
 
-        style = find_file(input(),Path(IMAGES_PATH))
+        style = find_file(input(), Path(IMAGES_PATH))
+        style = check_error(style, IMAGES_PATH)
         style_path = Path(IMAGES_PATH + "/" + style)
 
         output =  'Result' + '_' + os.path.splitext(content)[0] + '_' + os.path.splitext(style)[0]
         output_path = Path(RESULTS_PATH + "/" + output + ".jpg")
-
 
         show_content_style(content_path, style_path)
 
@@ -59,6 +73,7 @@ if __name__ == "__main__":
 
         print("Final Loss: " + str(best_loss.numpy()))
         show_image(best_img, output)
+        plt.show()
 
         print("image saved in Results folder")
 
