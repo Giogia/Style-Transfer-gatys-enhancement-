@@ -5,6 +5,7 @@ from Image import show_content_style, show_image
 from pathlib import Path
 from ImageStyleTransfer import image_style_transfer
 from VideoStyleTransfer import video_style_transfer
+from VideoStyleTransferGatys import video_style_transfer_gatys
 
 PATH = os.getcwd()
 IMAGES_PATH = PATH + '/Images'
@@ -103,5 +104,29 @@ if __name__ == "__main__":
         video_style_transfer(str(content_path), str(model_path), str(output_path), batch_s=4)
 
         print("video saved in Results folder")
+    
+    if choice == '3':
 
+        print("Select Content Video:")
 
+        for file in os.listdir(Path(VIDEOS_PATH)):
+            print(os.path.splitext(file)[0])
+
+        content = find_file(input(),Path(VIDEOS_PATH))
+        content_path = Path(VIDEOS_PATH + "/" + content)
+
+        print("Select Style Image:")
+
+        for file in os.listdir(Path(IMAGES_PATH)):
+            print(os.path.splitext(file)[0])
+
+        image = find_file(input(), Path(IMAGES_PATH))
+        image_path = Path(IMAGES_PATH + "/" + image)
+
+        output = 'Result Gatys ' + os.path.splitext(content)[0] + '_' + os.path.splitext(image)[0]
+        output_path = Path(RESULTS_PATH + "/" + output + ".mp4")
+
+        print("Please wait, ignore tensorflow binary value warning")
+        video_style_transfer_gatys(str(content_path), str(image_path), str(output_path))
+
+        print("video saved in Results folder")
