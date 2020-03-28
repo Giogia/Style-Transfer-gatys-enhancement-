@@ -1,7 +1,8 @@
 # Style Transfer Project
+### JiaoTong University 
 
-Computer Vision course JiaoTong University 
 
+Computer Vision course 2018/2019
 
 |         Original         |           Style           |          Results       |
 :-------------------------:|:-------------------------:|:------------------------:
