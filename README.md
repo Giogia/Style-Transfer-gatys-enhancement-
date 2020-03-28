@@ -4,4 +4,4 @@
 
 |         Original         |           Style           |          Results       |
 :-------------------------:|:-------------------------:|:------------------------:
-<img src="/Images/Deer.jpg" width="100%"> | <img src="/Images/Abstract2.jpg" width="100%"> | <img src="/Results/Result_Deer_Abstract2.jpg" width="100%"> 
+<img src="/Images/Deer.jpg" width="100%"> | <img src="/Images/Abstract2.jpg" width="80%"> | <img src="/Results/Result_Deer_Abstract2.jpg" width="100%"> 
