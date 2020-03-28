@@ -4,4 +4,4 @@
 
 |         Original         |           Style           |          Results       |
 :-------------------------:|:-------------------------:|:------------------------:
-< img src="/Images/Deer.jpg">  | ![](/Images/Abstract2.jpg) |   ![](/Results/Result_Deer_Abstract2.jpg) 
+<img src="/Images/Deer.jpg">  | ![](/Images/Abstract2.jpg) |   ![](/Results/Result_Deer_Abstract2.jpg) 
